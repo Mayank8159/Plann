@@ -15,13 +15,13 @@ export default function Sidebar({ activeSection, onSectionChange }: SidebarProps
   ];
 
   return (
-    <aside className="hidden md:flex md:flex-col w-64 min-h-screen glass-effect border-r border-white/10 p-6">
+    <aside className="hidden md:flex md:flex-col w-64 min-h-screen premium-card border-r border-white/[0.08] p-6">
       {/* Logo */}
       <div className="mb-8">
-        <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 via-rose-400 to-violet-400 bg-clip-text text-transparent">
+        <h1 className="text-3xl font-bold text-gradient">
           My Planner
         </h1>
-        <p className="text-xs text-slate-400 mt-1">3-Bucket Life Formula</p>
+        <p className="text-xs text-white/50 mt-2">3-Bucket Life Formula</p>
       </div>
 
       {/* Navigation */}
@@ -36,16 +36,20 @@ export default function Sidebar({ activeSection, onSectionChange }: SidebarProps
               onClick={() => onSectionChange(item.id)}
               className={`
                 w-full flex items-center gap-3 px-4 py-3 rounded-lg
-                transition-all duration-200 group
+                transition-all duration-300 group font-medium
                 ${
                   isActive
-                    ? 'bg-white/10 text-white shadow-lg'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5'
+                    ? 'bg-gradient-to-r from-white/[0.08] to-white/[0.04] text-white shadow-lg border border-white/[0.12]'
+                    : 'text-white/60 hover:text-white hover:bg-white/[0.04] border border-transparent hover:border-white/[0.06]'
                 }
               `}
             >
-              <Icon className={`w-5 h-5 ${isActive ? 'text-emerald-400' : ''}`} />
-              <span className="font-medium">{item.label}</span>
+              <Icon className={`w-5 h-5 transition-all duration-300 ${
+                isActive 
+                  ? 'text-emerald-400 scale-110' 
+                  : 'group-hover:text-emerald-400'
+              }`} />
+              <span>{item.label}</span>
             </button>
           );
         })}
@@ -53,12 +57,36 @@ export default function Sidebar({ activeSection, onSectionChange }: SidebarProps
 
       {/* Footer Info */}
       <div className="absolute bottom-6 left-6 right-6">
-        <div className="glass-effect rounded-lg p-4">
-          <p className="text-xs text-slate-400 mb-2">Weekly Balance</p>
-          <div className="flex gap-2">
-            <div className="flex-1 h-2 rounded-full bg-emerald-500/30" />
-            <div className="flex-1 h-2 rounded-full bg-rose-500/30" />
-            <div className="flex-1 h-2 rounded-full bg-violet-500/30" />
+        <div className="premium-card rounded-lg p-4">
+          <p className="text-xs text-white/50 mb-3">Today's Balance</p>
+          <div className="space-y-2">
+            <div>
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-xs text-emerald-400">Money Maker</span>
+                <span className="text-xs text-white/40">45%</span>
+              </div>
+              <div className="h-1.5 bg-white/[0.08] rounded-full overflow-hidden">
+                <div className="h-full w-[45%] bg-gradient-to-r from-emerald-400 to-emerald-500 rounded-full" />
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-xs text-rose-400">Soul Stuff</span>
+                <span className="text-xs text-white/40">30%</span>
+              </div>
+              <div className="h-1.5 bg-white/[0.08] rounded-full overflow-hidden">
+                <div className="h-full w-[30%] bg-gradient-to-r from-rose-400 to-rose-500 rounded-full" />
+              </div>
+            </div>
+            <div>
+              <div className="flex justify-between items-center mb-1">
+                <span className="text-xs text-violet-400">Curiosity</span>
+                <span className="text-xs text-white/40">25%</span>
+              </div>
+              <div className="h-1.5 bg-white/[0.08] rounded-full overflow-hidden">
+                <div className="h-full w-[25%] bg-gradient-to-r from-violet-400 to-violet-500 rounded-full" />
+              </div>
+            </div>
           </div>
         </div>
       </div>

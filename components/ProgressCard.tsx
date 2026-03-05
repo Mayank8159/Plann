@@ -23,21 +23,21 @@ export default function ProgressCard({ item }: ProgressCardProps) {
   };
 
   return (
-    <div className="glass-effect rounded-xl p-4 md:p-5 hover:bg-white/10 transition-all duration-300 group">
-      <div className="flex items-start justify-between mb-3">
-        <div>
-          <h3 className="text-sm md:text-base font-semibold text-white mb-1">{item.name}</h3>
-          <p className="text-xs md:text-sm text-slate-400">
+    <div className="premium-card rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 hover:bg-white/10 transition-all duration-300 group">
+      <div className="flex items-start justify-between gap-3 mb-3 sm:mb-4">
+        <div className="min-w-0 flex-1">
+          <h3 className="text-xs sm:text-sm md:text-base font-semibold text-white mb-1 truncate">{item.name}</h3>
+          <p className="text-xs text-white/60">
             {item.current}{item.unit} of {item.total}{item.unit}
           </p>
         </div>
-        <div className={`p-1.5 md:p-2 rounded-lg ${accentColors[item.bucket]} bg-opacity-20 flex-shrink-0`}>
-          <TrendingUp className="w-4 h-4 md:w-5 md:h-5 text-white" />
+        <div className={`p-1.5 sm:p-2 rounded-lg ${accentColors[item.bucket]} bg-opacity-20 flex-shrink-0`}>
+          <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
         </div>
       </div>
 
       {/* Progress Bar */}
-      <div className="relative w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+      <div className="relative w-full h-2 bg-white/10 rounded-full overflow-hidden">
         <div
           className={`absolute top-0 left-0 h-full ${accentColors[item.bucket]} transition-all duration-500 rounded-full shadow-lg ${glowColors[item.bucket]}`}
           style={{ width: `${percentage}%` }}
@@ -46,7 +46,7 @@ export default function ProgressCard({ item }: ProgressCardProps) {
 
       {/* Percentage Display */}
       <div className="mt-2 text-right">
-        <span className={`text-base md:text-lg font-bold ${
+        <span className={`text-sm sm:text-base md:text-lg font-bold ${
           item.bucket === 'money' ? 'text-emerald-400' : 
           item.bucket === 'soul' ? 'text-rose-400' : 
           'text-violet-400'

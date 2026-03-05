@@ -1,14 +1,25 @@
 'use client';
 
-import { PROGRESS_ITEMS, ROUTINES } from '@/lib/constants';
-import ProgressCard from '../ProgressCard';
+import { ROUTINES, PROGRESS_ITEMS } from '@/lib/constants';
 import DailyStack from '../DailyStack';
-import RoutineToggle from '../RoutineToggle';
-import { Sparkles, TrendingUp, Calendar, Target, Flame } from 'lucide-react';
+import Timer from '../tools/Timer';
+import Stopwatch from '../tools/Stopwatch';
+import DateTimeWidget from '../tools/DateTimeWidget';
+import CalendarWidget from '../tools/CalendarWidget';
+import WeatherWidget from '../tools/WeatherWidget';
+import { Sparkles, Calendar, Target, Flame, BookOpen } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function DashboardView() {
-  const [routineMode, setRoutineMode] = useState<'college' | 'deepwork'>('college');
+  // Determine today's routine: college on Mon/Tue/Thu, deepwork on other days
+  const getRoutineMode = (): 'college' | 'deepwork' => {
+    const today = new Date().getDay();
+    // 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat, 0=Sun
+    return (today === 1 || today === 2 || today === 4) ? 'college' : 'deepwork';
+  };
+
+  const routineMode = getRoutineMode();
+
   const [stats, setStats] = useState({
     weekProgress: 0,
     streak: 1,
@@ -131,93 +142,92 @@ export default function DashboardView() {
   };
 
   return (
-    <div className="space-y-6 md:space-y-8">
+    <div className="w-full max-w-7xl mx-auto space-y-4 sm:space-y-6 md:space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl md:text-4xl font-bold text-white mb-2 flex items-center gap-2 md:gap-3">
-          <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-emerald-400" />
-          Dashboard Overview
+      <div className="mb-2 px-0">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gradient mb-1 sm:mb-2 flex items-center gap-2 sm:gap-3 flex-wrap">
+          <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 flex-shrink-0" />
+          <span>Dashboard</span>
         </h1>
-        <p className="text-sm md:text-base text-slate-400">
+        <p className="text-xs sm:text-sm md:text-base text-white/50">
           Your daily progress and schedule at a glance
         </p>
       </div>
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-effect rounded-xl p-4 md:p-5">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
+        <div className="premium-card rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 group hover:bg-white/[0.05] transition-all duration-300">
           <div className="flex items-center gap-2 mb-2">
-            <Target className="w-5 h-5 text-emerald-400" />
-            <p className="text-xs md:text-sm text-slate-400">Week Progress</p>
+            <Target className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 group-hover:scale-110 transition-transform" />
+            <p className="text-xs text-white/60">Week Progress</p>
           </div>
-          <p className="text-2xl md:text-3xl font-bold text-white">{stats.weekProgress}%</p>
-          <p className="text-xs text-slate-500 mt-1">All activities</p>
+          <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stats.weekProgress}%</p>
+          <p className="text-xs text-white/40 mt-1">All activities</p>
         </div>
-        <div className="glass-effect rounded-xl p-4 md:p-5">
+        <div className="premium-card rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 group hover:bg-white/[0.05] transition-all duration-300">
           <div className="flex items-center gap-2 mb-2">
-            <Flame className="w-5 h-5 text-rose-400" />
-            <p className="text-xs md:text-sm text-slate-400">Streak</p>
+            <Flame className="w-4 h-4 sm:w-5 sm:h-5 text-rose-400 group-hover:scale-110 transition-transform" />
+            <p className="text-xs text-white/60">Streak</p>
           </div>
-          <p className="text-2xl md:text-3xl font-bold text-white">{stats.streak}</p>
-          <p className="text-xs text-slate-500 mt-1">days consistent</p>
+          <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stats.streak}</p>
+          <p className="text-xs text-white/40 mt-1">days consistent</p>
         </div>
-        <div className="glass-effect rounded-xl p-4 md:p-5">
+        <div className="premium-card rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 group hover:bg-white/[0.05] transition-all duration-300">
           <div className="flex items-center gap-2 mb-2">
-            <Calendar className="w-5 h-5 text-violet-400" />
-            <p className="text-xs md:text-sm text-slate-400">Today's Progress</p>
+            <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-violet-400 group-hover:scale-110 transition-transform" />
+            <p className="text-xs text-white/60">Today's Progress</p>
           </div>
-          <p className="text-2xl md:text-3xl font-bold text-white">{stats.todayTasks}/10</p>
-          <p className="text-xs text-slate-500 mt-1">tasks completed</p>
+          <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stats.todayTasks}/10</p>
+          <p className="text-xs text-white/40 mt-1">tasks completed</p>
         </div>
-        <div className="glass-effect rounded-xl p-4 md:p-5">
+        <div className="premium-card rounded-lg sm:rounded-xl p-3 sm:p-4 md:p-5 group hover:bg-white/[0.05] transition-all duration-300">
           <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="w-5 h-5 text-emerald-400" />
-            <p className="text-xs md:text-sm text-slate-400">Focus Score</p>
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 group-hover:scale-110 transition-transform" />
+            <p className="text-xs text-white/60">Focus Score</p>
           </div>
-          <p className="text-2xl md:text-3xl font-bold text-white">{stats.focusScore}</p>
-          <p className="text-xs text-slate-500 mt-1">out of 10</p>
+          <p className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{stats.focusScore}</p>
+          <p className="text-xs text-white/40 mt-1">out of 10</p>
         </div>
-      </div>
-
-      {/* Routine Toggle */}
-      <div className="flex justify-center">
-        <RoutineToggle selectedMode={routineMode} onModeChange={setRoutineMode} />
       </div>
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-        {/* Progress Section */}
-        <div className="lg:col-span-2 space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+        {/* Study Tools Section */}
+        <div className="md:col-span-2 space-y-4 sm:space-y-6">
           <div>
-            <h2 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-2">
-              <TrendingUp className="w-6 h-6 text-emerald-400" />
-              Progress Tracking
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
+              <BookOpen className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />
+              Study Tools
             </h2>
-            <div className="grid grid-cols-1 gap-4">
-              {PROGRESS_ITEMS.map((item) => (
-                <ProgressCard key={item.id} item={item} />
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+              <Timer />
+              <Stopwatch />
+              <DateTimeWidget />
+              <CalendarWidget />
             </div>
           </div>
 
+          {/* Weather Widget */}
+          <WeatherWidget />
+
           {/* Bucket Balance */}
           <div>
-            <h2 className="text-xl md:text-2xl font-bold text-white mb-4">Weekly Balance ({routineMode === 'college' ? 'College Day' : 'Deep Work Day'})</h2>
-            <div className="glass-effect rounded-xl p-6">
-              <div className="space-y-4">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-3 sm:mb-4">Today's Balance ({routineMode === 'college' ? 'College Day' : 'Deep Work Day'})</h2>
+            <div className="premium-card rounded-xl p-4 sm:p-6">
+              <div className="space-y-3 sm:space-y-4">
                 {bucketBalance.map((bucket, idx) => {
                   const colors = colorMap[bucket.name as keyof typeof colorMap];
                   return (
                     <div key={idx}>
                       <div className="flex items-center justify-between mb-2">
-                        <span className={`text-sm font-medium ${colors.textColor}`}>
+                        <span className={`text-xs sm:text-sm font-medium ${colors.textColor}`}>
                           {bucket.name}
                         </span>
-                        <span className="text-sm text-slate-400">{bucket.percent}%</span>
+                        <span className="text-xs sm:text-sm text-white/50">{bucket.percent}%</span>
                       </div>
-                      <div className="h-3 bg-slate-800 rounded-full overflow-hidden">
+                      <div className="h-2 sm:h-2.5 bg-white/[0.05] rounded-full overflow-hidden border border-white/[0.05]">
                         <div 
-                          className={`h-full rounded-full ${colors.bgColor}`}
+                          className={`h-full rounded-full ${colors.bgColor} shadow-lg`}
                           style={{ width: `${bucket.percent}%` }} 
                         />
                       </div>
@@ -230,10 +240,10 @@ export default function DashboardView() {
         </div>
 
         {/* Daily Stack */}
-        <div className="lg:col-span-1">
-          <h2 className="text-xl md:text-2xl font-bold text-white mb-4 flex items-center gap-2">
-            <Calendar className="w-6 h-6 text-violet-400" />
-            Today's Schedule
+        <div className="md:col-span-1">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-3 sm:mb-4 flex items-center gap-2">
+            <Calendar className="w-5 h-5 sm:w-6 sm:h-6 text-violet-400" />
+            <span className="truncate">Today's Schedule</span>
           </h2>
           <DailyStack routine={ROUTINES[routineMode]} />
         </div>

@@ -29,17 +29,19 @@ export default function Dashboard() {
       <Sidebar activeSection={activeSection} onSectionChange={setActiveSection} />
 
       {/* Main Content */}
-      <main className="flex-1 p-4 md:p-8 overflow-y-auto pb-24 md:pb-8">
-        {/* Mobile Logo */}
-        <div className="md:hidden mb-6">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 via-rose-400 to-violet-400 bg-clip-text text-transparent">
-            Plann
-          </h1>
-          <p className="text-xs text-slate-400">3-Bucket Life Formula</p>
-        </div>
+      <main className="flex-1 overflow-y-auto pb-20 sm:pb-24 md:pb-8">
+        <div className="w-full max-w-full px-3 sm:px-4 md:px-8 py-4 md:py-8">
+          {/* Mobile Logo */}
+          <div className="md:hidden mb-4 sm:mb-6">
+            <h1 className="text-xl sm:text-2xl font-bold text-gradient">
+              My Planner
+            </h1>
+            <p className="text-xs sm:text-sm text-white/60 mt-1">3-Bucket Life Formula</p>
+          </div>
 
-        {/* Render Active View */}
-        {renderView()}
+          {/* Render Active View */}
+          {renderView()}
+        </div>
       </main>
 
       {/* Bottom Navigation - Mobile Only */}
