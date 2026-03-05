@@ -6,7 +6,6 @@ import BottomNav from './BottomNav';
 import DashboardView from './views/DashboardView';
 import BucketsView from './views/BucketsView';
 import RoutineView from './views/RoutineView';
-import SettingsView from './views/SettingsView';
 
 export default function Dashboard() {
   const [activeSection, setActiveSection] = useState('dashboard');
@@ -19,8 +18,6 @@ export default function Dashboard() {
         return <BucketsView />;
       case 'routine':
         return <RoutineView />;
-      case 'settings':
-        return <SettingsView />;
       default:
         return <DashboardView />;
     }

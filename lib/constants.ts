@@ -32,6 +32,7 @@ export interface RoutineDay {
     activity: string;
     bucket: BucketType | 'general';
     duration: string;
+    goal?: string;
   }[];
 }
 
@@ -162,30 +163,28 @@ export const ROUTINES: Record<'college' | 'deepwork', RoutineDay> = {
   college: {
     type: 'college',
     schedule: [
-      { time: '06:00', activity: 'Morning Workout', bucket: 'soul', duration: '1h' },
-      { time: '07:30', activity: 'College Classes', bucket: 'general', duration: '6h' },
-      { time: '14:00', activity: 'Lunch & Rest', bucket: 'general', duration: '1.5h' },
-      { time: '15:30', activity: 'TCS NQT Prep', bucket: 'money', duration: '2h' },
-      { time: '17:30', activity: 'SQL Practice', bucket: 'money', duration: '1.5h' },
-      { time: '19:00', activity: 'Dinner', bucket: 'general', duration: '1h' },
-      { time: '20:00', activity: 'Anime Time', bucket: 'soul', duration: '1.5h' },
-      { time: '21:30', activity: 'German A1 Study', bucket: 'money', duration: '1h' },
-      { time: '22:30', activity: 'Wind Down', bucket: 'general', duration: '30m' },
+      { time: '06:00', activity: 'Morning Workout', bucket: 'soul', duration: '1.5h', goal: 'Calisthenics/Gym to wake up the brain.' },
+      { time: '07:30', activity: 'Commute / Prep', bucket: 'money', duration: '1.5h', goal: 'Listen to German A1 audio or IELTS vocab.' },
+      { time: '09:00', activity: 'College Classes', bucket: 'money', duration: '8h', goal: 'Focus on AI/ML labs; use gaps for SQL practice.' },
+      { time: '17:00', activity: 'Social Battery', bucket: 'soul', duration: '1.5h', goal: 'Decompress with friends before the evening shift.' },
+      { time: '18:30', activity: 'Placement Prep', bucket: 'money', duration: '2h', goal: 'TCS NQT aptitude or coding problems.' },
+      { time: '20:30', activity: 'Anime Time', bucket: 'soul', duration: '1h', goal: 'Dinner + 2 episodes of your favorite series.' },
+      { time: '21:30', activity: 'German A1 Study', bucket: 'money', duration: '1h', goal: '1 hour of active grammar/vocab study.' },
+      { time: '22:30', activity: 'Wind Down', bucket: 'general', duration: '30m', goal: 'No screens, sleep by 23:00.' },
     ],
   },
   deepwork: {
     type: 'deepwork',
     schedule: [
-      { time: '06:00', activity: 'Morning Workout', bucket: 'soul', duration: '1.5h' },
-      { time: '08:00', activity: 'Deep Work: AI/ML', bucket: 'money', duration: '3h' },
-      { time: '11:00', activity: 'Break & Brunch', bucket: 'general', duration: '1h' },
-      { time: '12:00', activity: 'App Development', bucket: 'money', duration: '3h' },
-      { time: '15:00', activity: 'IELTS Practice', bucket: 'money', duration: '2h' },
-      { time: '17:00', activity: 'Game Dev Studio', bucket: 'curiosity', duration: '2h' },
-      { time: '19:00', activity: 'Dinner', bucket: 'general', duration: '1h' },
-      { time: '20:00', activity: 'Social Time / Friends', bucket: 'soul', duration: '2h' },
-      { time: '22:00', activity: 'Current Affairs Reading', bucket: 'curiosity', duration: '1h' },
-      { time: '23:00', activity: 'Wind Down', bucket: 'general', duration: '30m' },
+      { time: '06:30', activity: 'Morning Workout', bucket: 'soul', duration: '2h', goal: 'Longer, focused Calisthenics session.' },
+      { time: '08:30', activity: 'Language Power Hour', bucket: 'money', duration: '1.5h', goal: '45m German + 45m IELTS (Writing/Speaking).' },
+      { time: '10:00', activity: 'The Tech Sprint', bucket: 'money', duration: '3h', goal: 'Deep Work: AI/ML projects or App Dev.' },
+      { time: '13:00', activity: 'Lunch & Reset', bucket: 'soul', duration: '1h', goal: 'Eat away from the screen; quick walk.' },
+      { time: '14:00', activity: 'Game Dev Studio', bucket: 'curiosity', duration: '3h', goal: 'Build your studio/game logic (Apply AI skills here).' },
+      { time: '17:00', activity: 'Professional Edge', bucket: 'money', duration: '1.5h', goal: 'SQL Advanced modules or TCS Mock Tests.' },
+      { time: '18:30', activity: 'Current Affairs', bucket: 'curiosity', duration: '1h', goal: 'Read tech/global news (IELTS Reading practice).' },
+      { time: '19:30', activity: 'Social / Free', bucket: 'soul', duration: '2.5h', goal: 'Hangout with friends or watch Anime.' },
+      { time: '22:00', activity: 'Review & Plan', bucket: 'general', duration: '1h', goal: 'Update your Next.js Dashboard; plan tomorrow.' },
     ],
   },
 };

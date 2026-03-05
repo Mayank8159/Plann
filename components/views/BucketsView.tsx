@@ -2,7 +2,7 @@
 
 import { BUCKETS } from '@/lib/constants';
 import BucketCard from '../BucketCard';
-import { Target, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Target } from 'lucide-react';
 
 export default function BucketsView() {
   return (
@@ -80,42 +80,7 @@ export default function BucketsView() {
         ))}
       </div>
 
-      {/* Action Items */}
-      <div className="glass-effect rounded-xl p-6">
-        <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <CheckCircle2 className="w-6 h-6 text-emerald-400" />
-          Quick Actions
-        </h2>
-        <div className="space-y-3">
-          <button className="w-full flex items-center justify-between p-4 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-all group">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
-                <span className="text-emerald-400 text-lg">+</span>
-              </div>
-              <span className="text-white font-medium">Add New Activity</span>
-            </div>
-            <ArrowRight className="w-5 h-5 text-slate-600 group-hover:text-slate-400 transition-colors" />
-          </button>
-          <button className="w-full flex items-center justify-between p-4 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-all group">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-rose-500/20 flex items-center justify-center">
-                <span className="text-rose-400 text-lg">⏰</span>
-              </div>
-              <span className="text-white font-medium">Set Time Tracking</span>
-            </div>
-            <ArrowRight className="w-5 h-5 text-slate-600 group-hover:text-slate-400 transition-colors" />
-          </button>
-          <button className="w-full flex items-center justify-between p-4 rounded-lg bg-slate-800/50 hover:bg-slate-800 transition-all group">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-violet-500/20 flex items-center justify-center">
-                <span className="text-violet-400 text-lg">📊</span>
-              </div>
-              <span className="text-white font-medium">View Analytics</span>
-            </div>
-            <ArrowRight className="w-5 h-5 text-slate-600 group-hover:text-slate-400 transition-colors" />
-          </button>
-        </div>
-      </div>
+
     </div>
   );
 }

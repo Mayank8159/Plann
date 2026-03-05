@@ -1,6 +1,6 @@
 'use client';
 
-import { LayoutDashboard, Target, Calendar, Settings } from 'lucide-react';
+import { LayoutDashboard, Target, Calendar } from 'lucide-react';
 
 interface BottomNavProps {
   activeSection: string;
@@ -12,7 +12,6 @@ export default function BottomNav({ activeSection, onSectionChange }: BottomNavP
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'buckets', label: 'Buckets', icon: Target },
     { id: 'routine', label: 'Routine', icon: Calendar },
-    { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
   return (

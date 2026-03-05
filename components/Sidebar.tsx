@@ -1,6 +1,6 @@
 'use client';
 
-import { LayoutDashboard, Target, Calendar, Settings } from 'lucide-react';
+import { LayoutDashboard, Target, Calendar } from 'lucide-react';
 
 interface SidebarProps {
   activeSection: string;
@@ -12,7 +12,6 @@ export default function Sidebar({ activeSection, onSectionChange }: SidebarProps
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'buckets', label: 'My Buckets', icon: Target },
     { id: 'routine', label: 'Routine', icon: Calendar },
-    { id: 'settings', label: 'Settings', icon: Settings },
   ];
 
   return (
@@ -20,7 +19,7 @@ export default function Sidebar({ activeSection, onSectionChange }: SidebarProps
       {/* Logo */}
       <div className="mb-8">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-emerald-400 via-rose-400 to-violet-400 bg-clip-text text-transparent">
-          Plann
+          My Planner
         </h1>
         <p className="text-xs text-slate-400 mt-1">3-Bucket Life Formula</p>
       </div>
